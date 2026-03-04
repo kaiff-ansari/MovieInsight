@@ -1,7 +1,7 @@
 const { validateImdbId } = require('../lib/omdb');
 
 describe('validateImdbId', () => {
-  // Valid cases
+  
   test('accepts standard 7-digit IMDb ID', () => {
     expect(validateImdbId('tt0133093')).toBe(true);
   });
@@ -12,7 +12,7 @@ describe('validateImdbId', () => {
     expect(validateImdbId('  tt0133093  ')).toBe(true);
   });
 
-  // Invalid cases
+  
   test('rejects missing tt prefix', () => {
     expect(validateImdbId('0133093')).toBe(false);
   });
