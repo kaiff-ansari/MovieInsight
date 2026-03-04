@@ -18,10 +18,10 @@ export async function GET(request) {
   }
 
   try {
-    // Step 1: Movie details from OMDB
+    
     const movie = await fetchMovieDetails(imdbId);
 
-    // Step 2: Gemini AI — agar fail ho toh bhi movie dikhao
+    
     let sentiment = null;
     try {
       sentiment = await analyzeMovieSentiment(movie);

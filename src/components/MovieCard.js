@@ -2,7 +2,6 @@
 
 import Image from 'next/image';
 
-// Sentiment display config
 const SENTIMENT = {
   positive: { color: '#22c55e', bg: 'rgba(34,197,94,0.1)',  icon: '😊', label: 'Positive' },
   mixed:    { color: '#f59e0b', bg: 'rgba(245,158,11,0.1)', icon: '😐', label: 'Mixed'    },
@@ -18,84 +17,80 @@ export default function MovieCard({ data }) {
   const hasPoster = movie.Poster && movie.Poster !== 'N/A';
 
   return (
-    <div style={{ animation: 'cardIn 0.5s cubic-bezier(0.16,1,0.3,1)' }}>
+    <div className="animate-[cardIn_0.5s_cubic-bezier(0.16,1,0.3,1)]">
 
-      {/* ── Movie Info ── */}
-      <div style={{
-        background: 'var(--bg2)', border: '1px solid var(--border)',
-        borderRadius: '20px', overflow: 'hidden', marginBottom: '20px',
-      }}>
-        {/* Top accent line */}
-        <div style={{ height: '3px', background: 'linear-gradient(90deg, var(--accent2), var(--accent), transparent)' }} />
+   
+      <div className="bg-[var(--bg2)] border border-[var(--border)] rounded-[20px] overflow-hidden mb-5">
 
-        <div style={{ padding: '32px', display: 'flex', gap: '32px', flexWrap: 'wrap', alignItems: 'flex-start' }}>
+        <div className="h-[3px] bg-gradient-to-r from-[var(--accent2)] via-[var(--accent)] to-transparent" />
 
-          {/* Poster */}
-          <div style={{
-            flexShrink: 0, borderRadius: '12px', overflow: 'hidden',
-            boxShadow: '0 20px 60px rgba(0,0,0,0.6)',
-            background: 'var(--surface)', width: '160px', height: '240px', position: 'relative',
-          }}>
+        <div className="p-8 flex gap-8 flex-wrap items-start">
+
+         
+          <div className="flex-shrink-0 rounded-xl overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.6)] bg-[var(--surface)] w-[160px] h-[240px] relative">
             {hasPoster ? (
-              <Image src={movie.Poster} alt={`${movie.Title} poster`}
-                fill style={{ objectFit: 'cover' }} unoptimized />
+              <Image
+                src={movie.Poster}
+                alt={`${movie.Title} poster`}
+                fill
+                className="object-cover"
+                unoptimized
+              />
             ) : (
-              <div style={{
-                width: '100%', height: '100%',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                color: 'var(--text-muted)', fontSize: '40px',
-              }}>🎬</div>
+              <div className="w-full h-full flex items-center justify-center text-[var(--text-muted)] text-[40px]">
+                🎬
+              </div>
             )}
           </div>
 
-          {/* Details */}
-          <div style={{ flex: 1, minWidth: '200px' }}>
+ 
+          <div className="flex-1 min-w-[200px]">
 
-            {/* Genre pills */}
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginBottom: '12px' }}>
+           
+            <div className="flex flex-wrap gap-2 mb-3">
               {genres.map(g => (
-                <span key={g} style={{
-                  background: 'var(--surface)', border: '1px solid var(--border)',
-                  borderRadius: '6px', padding: '3px 10px',
-                  fontSize: '11px', color: 'var(--text-muted)',
-                  textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 500,
-                }}>{g}</span>
+                <span
+                  key={g}
+                  className="bg-[var(--surface)] border border-[var(--border)] rounded-md px-[10px] py-[3px] text-[11px] text-[var(--text-muted)] uppercase tracking-[0.08em] font-medium"
+                >
+                  {g}
+                </span>
               ))}
             </div>
 
-            {/* Title */}
-            <h2 style={{
-              fontFamily: 'var(--font-display)',
-              fontSize: 'clamp(1.4rem, 4vw, 2rem)',
-              fontWeight: 700, lineHeight: 1.2, marginBottom: '10px',
-            }}>{movie.Title}</h2>
+            
+            <h2
+              className="font-display font-bold leading-[1.2] mb-2.5"
+              style={{ fontSize: 'clamp(1.4rem,4vw,2rem)' }}
+            >
+              {movie.Title}
+            </h2>
 
-            {/* Meta row */}
-            <div style={{
-              display: 'flex', flexWrap: 'wrap', gap: '14px',
-              marginBottom: '18px', alignItems: 'center',
-            }}>
-              <span style={{ color: 'var(--text-muted)', fontSize: '14px' }}>{movie.Year}</span>
-              <Dot />
-              <span style={{ color: 'var(--text-muted)', fontSize: '14px' }}>{movie.Runtime}</span>
-              <Dot />
-              <span style={{ color: 'var(--text-muted)', fontSize: '14px' }}>{movie.Rated}</span>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
-                <span style={{ color: '#fbbf24' }}>★</span>
-                <span style={{ fontWeight: 700, fontSize: '15px' }}>{movie.imdbRating}</span>
-                <span style={{ color: 'var(--text-muted)', fontSize: '12px' }}>/10</span>
+            
+            <div className="flex flex-wrap gap-3.5 mb-[18px] items-center text-[14px] text-[var(--text-muted)]">
+              <span>{movie.Year}</span>
+              <span className="text-[var(--border)]">·</span>
+              <span>{movie.Runtime}</span>
+              <span className="text-[var(--border)]">·</span>
+              <span>{movie.Rated}</span>
+
+              <div className="flex items-center gap-1.5">
+                <span className="text-[#fbbf24]">★</span>
+                <span className="font-bold text-[15px] text-[var(--text)]">
+                  {movie.imdbRating}
+                </span>
+                <span className="text-[12px] text-[var(--text-muted)]">/10</span>
               </div>
             </div>
 
-            {/* Plot */}
-            <p style={{
-              color: 'var(--text-muted)', fontSize: '14px',
-              lineHeight: 1.75, marginBottom: '20px', maxWidth: '520px',
-            }}>{movie.Plot}</p>
+            
+            <p className="text-[var(--text-muted)] text-[14px] leading-[1.75] mb-5 max-w-[520px]">
+              {movie.Plot}
+            </p>
 
-            {/* Director & votes */}
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '24px' }}>
-              <InfoItem label="Director"   value={movie.Director} />
+            
+            <div className="flex flex-wrap gap-6">
+              <InfoItem label="Director" value={movie.Director} />
               <InfoItem label="IMDb Votes" value={movie.imdbVotes} />
               {movie.Released && movie.Released !== 'N/A' && (
                 <InfoItem label="Released" value={movie.Released} />
@@ -104,49 +99,42 @@ export default function MovieCard({ data }) {
           </div>
         </div>
 
-        {/* All ratings strip */}
+        
         {movie.Ratings?.length > 0 && (
-          <div style={{
-            borderTop: '1px solid var(--border)',
-            padding: '20px 32px',
-            display: 'flex', flexWrap: 'wrap', gap: '28px',
-          }}>
+          <div className="border-t border-[var(--border)] px-8 py-5 flex flex-wrap gap-7">
             {movie.Ratings.map(r => (
               <div key={r.Source}>
-                <p style={{ fontSize: '11px', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '4px' }}>
+                <p className="text-[11px] text-[var(--text-muted)] uppercase tracking-[0.08em] mb-1">
                   {r.Source}
                 </p>
-                <p style={{ fontWeight: 700, fontSize: '18px', color: 'var(--accent)' }}>{r.Value}</p>
+                <p className="font-bold text-[18px] text-[var(--accent)]">
+                  {r.Value}
+                </p>
               </div>
             ))}
           </div>
         )}
       </div>
 
-      {/* ── Cast ── */}
+      
       {cast.length > 0 && (
-        <div style={{
-          background: 'var(--bg2)', border: '1px solid var(--border)',
-          borderRadius: '20px', padding: '28px 32px', marginBottom: '20px',
-        }}>
-          <h3 style={sectionTitle}>Cast</h3>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
+        <div className="bg-[var(--bg2)] border border-[var(--border)] rounded-[20px] px-8 py-7 mb-5">
+          <SectionTitle>Cast</SectionTitle>
+
+          <div className="flex flex-wrap gap-2.5">
             {cast.map((actor, i) => (
-              <div key={actor} style={{
-                background: 'var(--surface)', border: '1px solid var(--border)',
-                borderRadius: '100px', padding: '8px 18px',
-                fontSize: '14px', color: 'var(--text)',
-                display: 'flex', alignItems: 'center', gap: '8px',
-                animation: `fadeInUp 0.4s ease ${i * 0.06}s both`,
-              }}>
-                {/* Avatar initial */}
-                <span style={{
-                  width: '24px', height: '24px', borderRadius: '50%',
-                  background: `hsl(${(i * 53) % 360},35%,22%)`,
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  fontSize: '10px', fontWeight: 700,
-                  color: `hsl(${(i * 53) % 360},65%,70%)`,
-                }}>
+              <div
+                key={actor}
+                className="bg-[var(--surface)] border border-[var(--border)] rounded-full px-4 py-2 text-[14px] text-[var(--text)] flex items-center gap-2 animate-[fadeInUp_0.4s_ease_both]"
+                style={{ animationDelay: `${i * 0.06}s` }}
+              >
+                <span
+                  className="w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold"
+                  style={{
+                    background: `hsl(${(i * 53) % 360},35%,22%)`,
+                    color: `hsl(${(i * 53) % 360},65%,70%)`,
+                  }}
+                >
                   {actor.split(' ').map(n => n[0]).join('').slice(0, 2)}
                 </span>
                 {actor}
@@ -156,131 +144,122 @@ export default function MovieCard({ data }) {
         </div>
       )}
 
-      {/* ── AI Sentiment ── */}
-      <div style={{
-        background: 'var(--bg2)',
-        border: `1px solid ${sc.color}33`,
-        borderRadius: '20px', overflow: 'hidden',
-      }}>
-        <div style={{ height: '3px', background: `linear-gradient(90deg, ${sc.color}, transparent)` }} />
+    
+      <div
+        className="bg-[var(--bg2)] rounded-[20px] overflow-hidden"
+        style={{ border: `1px solid ${sc.color}33` }}
+      >
+        <div
+          className="h-[3px]"
+          style={{ background: `linear-gradient(90deg, ${sc.color}, transparent)` }}
+        />
 
-        <div style={{ padding: '32px' }}>
-          {/* Header row */}
-          <div style={{
-            display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-            flexWrap: 'wrap', gap: '16px', marginBottom: '24px',
-          }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-              <div style={{
-                width: '40px', height: '40px', borderRadius: '10px',
-                background: 'rgba(59,130,246,0.15)',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-              }}>
-                <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="#3b82f6" strokeWidth="2">
-                  <path strokeLinecap="round" strokeLinejoin="round"
-                    d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09Z" />
-                </svg>
+        <div className="p-8">
+
+          
+          <div className="flex items-center justify-between flex-wrap gap-4 mb-6">
+
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-[10px] bg-[rgba(59,130,246,0.15)] flex items-center justify-center">
+                ✦
               </div>
               <div>
-                <p style={{ fontWeight: 600, fontSize: '16px' }}>AI Sentiment Analysis</p>
-                <p style={{ fontSize: '12px', color: 'var(--text-muted)' }}>Powered by Gemini AI</p>
+                <p className="font-semibold text-[16px] text-[var(--text)]">
+                  AI Sentiment Analysis
+                </p>
+                <p className="text-[12px] text-[var(--text-muted)]">
+                  Powered by Gemini API
+                </p>
               </div>
             </div>
 
-            {/* Sentiment badge */}
-            <div style={{
-              background: sc.bg, border: `1px solid ${sc.color}44`,
-              borderRadius: '100px', padding: '8px 20px',
-              display: 'flex', alignItems: 'center', gap: '8px',
-              color: sc.color, fontWeight: 700, fontSize: '15px',
-            }}>
+            <div
+              className="rounded-full px-5 py-2 flex items-center gap-2 font-bold text-[15px]"
+              style={{
+                background: sc.bg,
+                border: `1px solid ${sc.color}44`,
+                color: sc.color,
+              }}
+            >
               {sc.icon} {sc.label}
             </div>
           </div>
 
-          {/* Score bar */}
-          <div style={{ marginBottom: '24px' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
-              <span style={{ fontSize: '12px', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+          
+          <div className="mb-6">
+            <div className="flex justify-between mb-2">
+              <span className="text-[12px] text-[var(--text-muted)] uppercase tracking-[0.08em]">
                 Sentiment Score
               </span>
-              <span style={{ fontWeight: 700, color: sc.color }}>{sentiment.score}/100</span>
+              <span className="font-bold" style={{ color: sc.color }}>
+                {sentiment.score}/100
+              </span>
             </div>
-            <div style={{ height: '6px', borderRadius: '100px', background: 'var(--surface)', overflow: 'hidden' }}>
-              <div style={{
-                height: '100%', width: `${sentiment.score}%`,
-                background: `linear-gradient(90deg, ${sc.color}88, ${sc.color})`,
-                borderRadius: '100px',
-                animation: 'growBar 1.2s cubic-bezier(0.16,1,0.3,1) both',
-              }} />
+
+            <div className="h-[6px] rounded-full bg-[var(--surface)] overflow-hidden">
+              <div
+                className="h-full rounded-full animate-[growBar_1.2s_cubic-bezier(0.16,1,0.3,1)_both]"
+                style={{
+                  width: `${sentiment.score}%`,
+                  background: `linear-gradient(90deg, ${sc.color}88, ${sc.color})`,
+                }}
+              />
             </div>
           </div>
 
-          {/* AI summary quote */}
-          <p style={{
-            color: 'var(--text)', fontSize: '15px', lineHeight: 1.8,
-            marginBottom: '24px', padding: '20px',
-            background: 'var(--bg3)', borderRadius: '12px',
-            borderLeft: `3px solid ${sc.color}`,
-            fontStyle: 'italic',
-          }}>
-            &ldquo;{sentiment.summary}&rdquo;
+        
+          <p
+            className="text-[15px] leading-[1.8] mb-6 p-5 bg-[var(--bg3)] rounded-xl italic"
+            style={{ borderLeft: `3px solid ${sc.color}` }}
+          >
+            “{sentiment.summary}”
           </p>
 
-          {/* Key highlights */}
+       
           {sentiment.highlights?.length > 0 && (
-            <div>
-              <p style={sectionTitle}>Key Highlights</p>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+            <>
+              <SectionTitle>Key Highlights</SectionTitle>
+              <div className="flex flex-wrap gap-2">
                 {sentiment.highlights.map((h, i) => (
-                  <div key={i} style={{
-                    background: `${sc.color}0f`,
-                    border: `1px solid ${sc.color}22`,
-                    borderRadius: '8px', padding: '8px 14px',
-                    fontSize: '13px', color: 'var(--text)',
-                    display: 'flex', alignItems: 'center', gap: '6px',
-                    animation: `fadeInUp 0.4s ease ${i * 0.1}s both`,
-                  }}>
-                    <span style={{ color: sc.color }}>✦</span> {h}
+                  <div
+                    key={i}
+                    className="rounded-md px-3 py-2 text-[13px] flex items-center gap-1.5 animate-[fadeInUp_0.4s_ease_both]"
+                    style={{
+                      background: `${sc.color}0f`,
+                      border: `1px solid ${sc.color}22`,
+                      animationDelay: `${i * 0.1}s`,
+                    }}
+                  >
+                    <span style={{ color: sc.color }}>✦</span>
+                    {h}
                   </div>
                 ))}
               </div>
-            </div>
+            </>
           )}
         </div>
       </div>
-
-      <style>{`
-        @keyframes cardIn {
-          from { opacity:0; transform:translateY(20px); }
-          to   { opacity:1; transform:translateY(0); }
-        }
-        @keyframes fadeInUp {
-          from { opacity:0; transform:translateY(8px); }
-          to   { opacity:1; transform:translateY(0); }
-        }
-        @keyframes growBar {
-          from { width: 0; }
-        }
-      `}</style>
     </div>
   );
 }
 
-// Small helpers
-function Dot() {
-  return <span style={{ color: 'var(--border)' }}>·</span>;
-}
 function InfoItem({ label, value }) {
   return (
     <div>
-      <p style={{ fontSize: '11px', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '4px' }}>{label}</p>
-      <p style={{ fontSize: '14px', fontWeight: 500 }}>{value}</p>
+      <p className="text-[11px] text-[var(--text-muted)] uppercase tracking-[0.1em] mb-1">
+        {label}
+      </p>
+      <p className="text-[14px] font-medium text-[var(--text)]">
+        {value}
+      </p>
     </div>
   );
 }
-const sectionTitle = {
-  fontSize: '12px', fontWeight: 600,
-  color: 'var(--text-muted)', textTransform: 'uppercase',
-  letterSpacing: '0.1em', marginBottom: '14px',
-};
+
+function SectionTitle({ children }) {
+  return (
+    <p className="text-[12px] font-semibold text-[var(--text-muted)] uppercase tracking-[0.1em] mb-3.5">
+      {children}
+    </p>
+  );
+}

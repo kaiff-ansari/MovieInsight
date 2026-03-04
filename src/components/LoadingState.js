@@ -2,77 +2,88 @@
 
 export default function LoadingState() {
   return (
-    <div style={{ display: 'grid', gap: '20px', animation: 'fadeIn 0.3s ease' }}>
+    <div className="grid gap-5 animate-[fadeIn_0.3s_ease]">
 
-      {/* Movie info skeleton */}
-      <div style={{
-        background: 'var(--bg2)', border: '1px solid var(--border)',
-        borderRadius: '20px', padding: '32px',
-        display: 'flex', gap: '28px', alignItems: 'flex-start', flexWrap: 'wrap',
-      }}>
-        <Shimmer width={160} height={240} radius={12} />
-        <div style={{ flex: 1, minWidth: '200px' }}>
+     
+      <div className="bg-neutral-900 border border-neutral-700 rounded-3xl p-8 flex flex-wrap gap-7 items-start">
+        <Shimmer className="w-40 h-60 rounded-xl" />
+
+        <div className="flex-1 min-w-[200px]">
           {[200, 280, 120, 180, 150].map((w, i) => (
-            <Shimmer key={i} width={w} height={i === 1 ? 28 : 15}
-              radius={6} style={{ marginBottom: i === 1 ? 16 : 12 }} delay={i * 0.08} />
+            <Shimmer
+              key={i}
+              className={`${i === 1 ? 'h-7 mb-4' : 'h-4 mb-3'} rounded-md`}
+              style={{ width: w }}
+              delay={i * 0.08}
+            />
           ))}
         </div>
       </div>
 
-      {/* Sentiment skeleton */}
-      <div style={{
-        background: 'var(--bg2)', border: '1px solid var(--border)',
-        borderRadius: '20px', padding: '32px',
-      }}>
-        <Shimmer width={200} height={20} radius={6} style={{ marginBottom: 20 }} />
-        <div style={{ display: 'flex', gap: '10px', marginBottom: '20px' }}>
+     
+      <div className="bg-neutral-900 border border-neutral-700 rounded-3xl p-8">
+        <Shimmer className="w-52 h-5 rounded-md mb-5" />
+
+        <div className="flex gap-2.5 mb-5">
           {[1, 2, 3].map(i => (
-            <div key={i} style={{ flex: 1 }}>
-              <Shimmer width="100%" height={36} radius={10} delay={i * 0.1} />
+            <div key={i} className="flex-1">
+              <Shimmer
+                className="w-full h-9 rounded-xl"
+                delay={i * 0.1}
+              />
             </div>
           ))}
         </div>
+
         {[100, 85, 70].map((w, i) => (
-          <Shimmer key={i} width={`${w}%`} height={14} radius={4}
-            style={{ marginBottom: 10 }} delay={i * 0.1} />
+          <Shimmer
+            key={i}
+            className="h-3.5 rounded-sm mb-2"
+            style={{ width: `${w}%` }}
+            delay={i * 0.1}
+          />
         ))}
       </div>
 
-      <p style={{
-        textAlign: 'center', color: 'var(--text-muted)', fontSize: '14px', paddingTop: '4px',
-        animation: 'pulse 1.5s ease-in-out infinite',
-      }}>
-        ✦ Fetching movie data &amp; running AI analysis…
+      <p className="text-center text-sm text-neutral-400 pt-1 animate-pulse">
+        ✦ Fetching movie data & running AI analysis…
       </p>
 
-      <style>{`
-        @keyframes shimmer {
-          0%   { background-position: 200% 0; }
-          100% { background-position: -200% 0; }
-        }
+      
+      <style jsx>{`
         @keyframes fadeIn {
           from { opacity: 0; transform: translateY(10px); }
           to   { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes pulse {
-          0%, 100% { opacity: 0.4; }
-          50%       { opacity: 1; }
         }
       `}</style>
     </div>
   );
 }
 
-/** Reusable shimmer block */
-function Shimmer({ width, height, radius = 6, style = {}, delay = 0 }) {
+
+function Shimmer({ className = '', style = {}, delay = 0 }) {
   return (
-    <div style={{
-      width, height, borderRadius: radius,
-      background: 'linear-gradient(90deg, var(--surface) 25%, var(--bg3) 50%, var(--surface) 75%)',
-      backgroundSize: '200% 100%',
-      animation: `shimmer 1.5s infinite`,
-      animationDelay: `${delay}s`,
-      ...style,
-    }} />
+    <div
+      className={`
+        bg-gradient-to-r
+        from-neutral-800
+        via-neutral-700
+        to-neutral-800
+        bg-[length:200%_100%]
+        animate-[shimmer_1.5s_infinite]
+        ${className}
+      `}
+      style={{
+        animationDelay: `${delay}s`,
+        ...style,
+      }}
+    >
+      <style jsx>{`
+        @keyframes shimmer {
+          0% { background-position: 200% 0; }
+          100% { background-position: -200% 0; }
+        }
+      `}</style>
+    </div>
   );
 }

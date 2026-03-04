@@ -31,80 +31,71 @@ export default function Home() {
   }
 
   return (
-    <main style={{ minHeight: '100vh', position: 'relative', overflowX: 'hidden' }}>
+    <main className="min-h-screen relative overflow-x-hidden">
 
-      {/* Background glow */}
-      <div style={{
-        position: 'fixed', inset: 0, pointerEvents: 'none', zIndex: 0,
-        background: 'radial-gradient(ellipse 80% 50% at 50% -10%, rgba(59,130,246,0.13) 0%, transparent 70%)',
-      }} />
+      
+      <div
+        className="fixed inset-0 pointer-events-none z-0"
+        style={{
+          background:
+            'radial-gradient(ellipse 80% 50% at 50% -10%, rgba(59,130,246,0.13) 0%, transparent 70%)',
+        }}
+      />
 
-      <div style={{ position: 'relative', zIndex: 1 }}>
+      <div className="relative z-10">
 
-        {/* ── Hero Header ── */}
-        <header style={{ textAlign: 'center', padding: '72px 24px 48px' }}>
-          <div style={{
-            display: 'inline-flex', alignItems: 'center', gap: '8px',
-            background: 'rgba(232,184,75,0.1)', border: '1px solid rgba(232,184,75,0.25)',
-            borderRadius: '100px', padding: '5px 16px', marginBottom: '28px',
-            fontSize: '11px', color: 'var(--accent)', letterSpacing: '0.12em',
-            textTransform: 'uppercase', fontWeight: 600,
-          }}>
+     
+        <header className="text-center pt-[72px] px-6 pb-[48px]">
+
+          <div className="inline-flex items-center gap-2 bg-[rgba(232,184,75,0.1)] border border-[rgba(232,184,75,0.25)] rounded-full py-[5px] px-4 mb-7 text-[11px] text-[var(--accent)] tracking-[0.12em] uppercase font-semibold">
             ✦ AI-Driven Movie Intelligence
           </div>
 
-          <h1 style={{
-            fontFamily: 'var(--font-display)',
-            fontSize: 'clamp(2.6rem, 7vw, 4.8rem)',
-            fontWeight: 700, lineHeight: 1.1,
-            letterSpacing: '-0.02em', marginBottom: '20px',
-            background: 'linear-gradient(135deg, #e8eaf0 0%, #8892a4 100%)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-          }}>
+          <h1
+            className="font-display font-bold leading-[1.1] tracking-[-0.02em] mb-5 bg-gradient-to-br from-[#e8eaf0] to-[#8892a4] bg-clip-text text-transparent"
+            style={{ fontSize: 'clamp(2.6rem, 7vw, 4.8rem)' }}
+          >
             CineInsight
           </h1>
 
-          <p style={{
-            color: 'var(--text-muted)',
-            fontSize: 'clamp(0.95rem, 2vw, 1.1rem)',
-            maxWidth: '460px', margin: '0 auto',
-            lineHeight: 1.7, fontWeight: 300,
-          }}>
+          <p
+            className="text-[var(--text-muted)] max-w-[460px] mx-auto leading-[1.7] font-light"
+            style={{ fontSize: 'clamp(0.95rem, 2vw, 1.1rem)' }}
+          >
             Enter an IMDb ID to instantly unlock real-time movie data, AI-powered insights, and detailed cast analysis.
           </p>
         </header>
 
-
-        <div style={{ padding: '0 24px', maxWidth: '660px', margin: '0 auto 56px' }}>
+        <div className="px-6 max-w-[660px] mx-auto mb-14">
           <SearchBar onSearch={handleSearch} loading={loading} />
-          <p style={{ textAlign: 'center', marginTop: '14px', color: 'var(--text-muted)', fontSize: '13px' }}>
+
+          <p className="text-center mt-3.5 text-[var(--text-muted)] text-[13px]">
             Try:{' '}
-            <button onClick={() => handleSearch('tt0133093')} style={linkBtn}>
+            <button
+              onClick={() => handleSearch('tt0133093')}
+              className="text-[var(--accent)] underline decoration-dotted bg-none border-none cursor-pointer text-[13px] font-body"
+            >
               tt0133093
             </button>{' '}
             (The Matrix) or{' '}
-            <button onClick={() => handleSearch('tt0068646')} style={linkBtn}>
+            <button
+              onClick={() => handleSearch('tt0068646')}
+              className="text-[var(--accent)] underline decoration-dotted bg-none border-none cursor-pointer text-[13px] font-body"
+            >
               tt0068646
             </button>{' '}
             (The Godfather)
           </p>
         </div>
 
-
-        <div style={{ padding: '0 24px', maxWidth: '980px', margin: '0 auto', paddingBottom: '80px' }}>
+        <div className="px-6 max-w-[980px] mx-auto pb-20">
           {loading && <LoadingState />}
           {error && !loading && <ErrorMessage message={error} />}
           {result && !loading && <MovieCard data={result} />}
         </div>
 
-        {/* Footer */}
         {!result && !loading && (
-          <footer style={{
-            textAlign: 'center', padding: '36px 24px',
-            color: 'var(--text-muted)', fontSize: '13px',
-            borderTop: '1px solid var(--border)',
-          }}>
+          <footer className="text-center py-9 px-6 text-[var(--text-muted)] text-[13px] border-t border-[var(--border)]">
             AI Movie Insight Builder
           </footer>
         )}
@@ -112,10 +103,3 @@ export default function Home() {
     </main>
   );
 }
-
-const linkBtn = {
-  background: 'none', border: 'none',
-  color: 'var(--accent)', cursor: 'pointer',
-  fontSize: '13px', textDecoration: 'underline dotted',
-  fontFamily: 'var(--font-body)',
-};
