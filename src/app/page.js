@@ -8,7 +8,7 @@ import ErrorMessage from '@/components/ErrorMessage';
 
 export default function Home() {
   const [loading, setLoading] = useState(false);
-  const [error, setError]   = useState(null);
+  const [error, setError] = useState(null);
   const [result, setResult] = useState(null);
 
   async function handleSearch(imdbId) {
@@ -17,7 +17,7 @@ export default function Home() {
     setResult(null);
 
     try {
-      const res  = await fetch(`/api/movie?id=${encodeURIComponent(imdbId)}`);
+      const res = await fetch(`/api/movie?id=${encodeURIComponent(imdbId)}`);
       const data = await res.json();
 
       if (!res.ok) throw new Error(data.error || 'Failed to fetch movie');
@@ -50,7 +50,7 @@ export default function Home() {
             fontSize: '11px', color: 'var(--accent)', letterSpacing: '0.12em',
             textTransform: 'uppercase', fontWeight: 600,
           }}>
-            ✦ Powered by Gemini AI
+            ✦ AI-Driven Movie Intelligence
           </div>
 
           <h1 style={{
@@ -71,12 +71,11 @@ export default function Home() {
             maxWidth: '460px', margin: '0 auto',
             lineHeight: 1.7, fontWeight: 300,
           }}>
-            Enter an IMDb movie ID to unlock AI-powered audience sentiment,
-            cast details, and deep movie insights.
+            Enter an IMDb ID to instantly unlock real-time movie data, AI-powered insights, and detailed cast analysis.
           </p>
         </header>
 
-        {/* ── Search ── */}
+
         <div style={{ padding: '0 24px', maxWidth: '660px', margin: '0 auto 56px' }}>
           <SearchBar onSearch={handleSearch} loading={loading} />
           <p style={{ textAlign: 'center', marginTop: '14px', color: 'var(--text-muted)', fontSize: '13px' }}>
@@ -92,9 +91,9 @@ export default function Home() {
           </p>
         </div>
 
-        {/* ── Results ── */}
+
         <div style={{ padding: '0 24px', maxWidth: '980px', margin: '0 auto', paddingBottom: '80px' }}>
-          {loading          && <LoadingState />}
+          {loading && <LoadingState />}
           {error && !loading && <ErrorMessage message={error} />}
           {result && !loading && <MovieCard data={result} />}
         </div>
@@ -106,7 +105,7 @@ export default function Home() {
             color: 'var(--text-muted)', fontSize: '13px',
             borderTop: '1px solid var(--border)',
           }}>
-            Built with Next.js · OMDB API · Gemini AI
+            AI Movie Insight Builder
           </footer>
         )}
       </div>
