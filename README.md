@@ -1,135 +1,76 @@
-# CineInsight — AI Movie Insight Builder
+# AI Movie Insight Builder 🎬
 
-> Enter any IMDb movie ID → get AI-powered audience sentiment, cast, ratings & more.
+AI Movie Insight Builder is a full-stack web application where users can enter an IMDb movie ID and get detailed movie insights. The app fetches movie data from an external API and uses AI to generate audience sentiment summaries.
 
-Built for **Brew Full-Stack Developer Internship** assignment using **Next.js (JavaScript)**.
+## 🚀 Live Demo
 
----
+🔗 https://movie-insight-six.vercel.app/
 
-## Features
+## 🎥 Demo Video
 
-- 🎬 Movie title, poster, cast, year, runtime, genre, plot
-- ⭐ IMDb, Rotten Tomatoes & Metacritic ratings
-- 🤖 Gemini AI audience sentiment summary
-- 📊 Sentiment score bar + positive / mixed / negative classification
-- ✅ IMDb ID format validation with error messages
-- 📱 Fully responsive (mobile + desktop)
-- ✨ Shimmer skeleton loading, smooth animations, cinematic dark UI
 
----
+https://github.com/user-attachments/assets/60f8b65e-5863-4f21-8bd2-0c6c6f7c5f98
 
-## Tech Stack
+vie Insight.mp4…
+here)
 
-| Layer | Tech | Why |
-|---|---|---|
-| Frontend | Next.js 14 + React (JS) | SSR + API routes in one project, Vercel-optimised |
-| Movie Data | OMDB API (free) | Reliable structured IMDb data, poster URLs |
-| AI | Google Gemini 1.5 Flash | Fast inference, free tier, great structured JSON output |
-| Styling | CSS variables + inline styles | Zero dependencies, full control |
-| Testing | Jest | Simple, works great for utility/validation tests |
-| Deploy | Vercel | 1-click GitHub deploy, native Next.js support |
+## ✨ Features
 
----
+* Enter an **IMDb Movie ID**
+* Fetch movie details like **title, poster, cast, year, rating, and plot**
+* Generate **AI-powered audience sentiment summary**
+* Display **overall sentiment classification** (Positive / Mixed / Negative)
+* **Responsive UI** for desktop and mobile
+* Basic validation and error handling
 
-## Setup
+## 🛠 Tech Stack
 
-### 1. Install
+* **Frontend:** Next.js
+* **Backend:** Next.js API Routes
+* **AI:** Gemini API
+* **Movie Data:** OMDb API
+* **Deployment:** Vercel
 
-```bash
+## 📥 How It Works
+
+1. User enters an **IMDb movie ID** (example: `tt0133093`).
+2. The application fetches movie data from OMDb API.
+3. Reviews are processed using AI.
+4. AI generates a **summary and sentiment classification**.
+5. Results are displayed in a clean UI.
+
+## ⚙️ Environment Variables
+
+Create a `.env.local` file:
+
+OMDB_API_KEY=your_api_key
+GEMINI_API_KEY=your_api_key
+
+## 💻 Run Locally
+
+Clone the repository:
+
+git clone https://github.com/your-username/your-repo-name
+
+Install dependencies:
+
 npm install
-```
 
-### 2. Add API Keys
+Run the project:
 
-```bash
-cp .env.example .env.local
-```
-
-Open `.env.local` and fill in:
-
-```
-OMDB_API_KEY=your_key_here
-GEMINI_API_KEY=your_key_here
-```
-
-- Free OMDB key → https://www.omdbapi.com/apikey.aspx
-- Free Gemini key → https://aistudio.google.com/app/apikey
-
-### 3. Run
-
-```bash
 npm run dev
-# open http://localhost:3000
-```
 
-### 4. Test
+Open in browser:
 
-```bash
-npm test
-```
+http://localhost:3000
 
----
+## 📌 Example IMDb ID
 
-## Deploy to Vercel
+Example movie:
+https://www.imdb.com/title/tt0133093/
 
-1. Push to GitHub
-2. Go to vercel.com → New Project → import your repo
-3. Add environment variables: `OMDB_API_KEY` and `GEMINI_API_KEY`
-4. Deploy ✅
+IMDb ID → `tt0133093`
 
----
+## 📄 License
 
-## Project Structure
-
-```
-src/
-├── app/
-│   ├── api/movie/route.js     # GET /api/movie?id=ttXXXXXXX
-│   ├── globals.css
-│   ├── layout.js
-│   └── page.js
-├── components/
-│   ├── SearchBar.js
-│   ├── MovieCard.js
-│   ├── LoadingState.js
-│   └── ErrorMessage.js
-├── lib/
-│   ├── omdb.js                # OMDB API + ID validation
-│   └── gemini.js              # Gemini AI sentiment
-└── __tests__/
-    └── validation.test.js
-```
-
----
-
-## API
-
-```
-GET /api/movie?id=tt0133093
-```
-
-**Success:**
-```json
-{
-  "movie": { "Title": "The Matrix", "Year": "1999", ... },
-  "sentiment": {
-    "summary": "Audiences were blown away...",
-    "sentiment": "positive",
-    "score": 92,
-    "highlights": ["Groundbreaking VFX", "Iconic story", "Career-defining performances"]
-  }
-}
-```
-
-**Error:**
-```json
-{ "error": "Movie not found" }
-```
-
----
-
-## Assumptions
-
-1. **Review scraping**: IMDb blocks direct scraping. Gemini AI uses its trained knowledge + structured rating data (IMDb score, RT %, Metacritic) to generate accurate sentiment — this is the most reliable approach.
-2. **OMDB free tier**: 1000 requests/day, responses cached 1 hour server-side.
-3. **IMDb ID format**: Always `tt` + 7-8 digits per IMDb convention.
+This project is created for an internship assignment and educational purposes.
