@@ -50,7 +50,7 @@ GEMINI_API_KEY=your_api_key
 
 Clone the repository:
 
-git clone https://github.com/your-username/your-repo-name
+git clone https://github.com/kaiff-ansari/MovieInsight
 
 Install dependencies:
 
